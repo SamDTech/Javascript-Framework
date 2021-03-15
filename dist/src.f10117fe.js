@@ -136,6 +136,10 @@ function () {
     return this.data[propName];
   };
 
+  User.prototype.set = function (update) {
+    Object.assign(this.data, update);
+  };
+
   return User;
 }();
 
@@ -152,6 +156,9 @@ var User_1 = require("./models/User");
 var user = new User_1.User({
   name: 'sam',
   age: 20
+});
+user.set({
+  name: 'newName'
 });
 console.log(user.get('name'));
 },{"./models/User":"src/models/User.ts"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
