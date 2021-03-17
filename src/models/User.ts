@@ -1,3 +1,4 @@
+import { Attributes } from './Attributes';
 import { Eventing } from './Eventing';
 import { Sync } from './Sync';
 
@@ -13,4 +14,11 @@ export class User {
   public events: Eventing = new Eventing();
 
   public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl);
+
+  public attrs: Attributes<UserProps> = new Attributes<UserProps>;
+
+  constructor(attr: new Attributes<UserProps>){
+    
+  }
+
 }
