@@ -1,8 +1,6 @@
 {
   "users": [
     {
-      "name": "Sam",
-      "age": 20,
       "id": 1
     },
     {
@@ -19,6 +17,20 @@
       "name": "Sam",
       "age": 20,
       "id": 4
+    },
+    {
+      "name": "new record",
+      "id": 5
+    },
+    {
+      "name": "new record",
+      "age": 40,
+      "id": 6
+    },
+    {
+      "name": "new record",
+      "age": 40,
+      "id": 7
     }
   ]
 }
