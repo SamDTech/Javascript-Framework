@@ -9,7 +9,7 @@ export interface UserProps {
   age?: number;
 }
 
-const rootUrl: string = `https://localhost:3000/users`;
+const rootUrl: string = `http://localhost:3000/users`;
 
 export class User {
   public events: Eventing = new Eventing();
@@ -49,5 +49,16 @@ export class User {
     this.sync.fetch(id).then((response: AxiosResponse) => {
       this.set(response.data);
     });
+  }
+
+  save(): void {
+    this.sync
+      .save(this.attributes.getAll())
+      .then((response: AxiosResponse) => {
+        this.trigger('save');
+      })
+      .catch(() => {
+        this.trigger('error');
+      });
   }
 }

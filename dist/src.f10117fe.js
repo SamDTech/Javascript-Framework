@@ -140,6 +140,10 @@ function () {
     this.set = function (update) {
       Object.assign(_this.data, update);
     };
+
+    this.getAll = function () {
+      return _this.data;
+    };
   }
 
   return Attributes;
@@ -2041,7 +2045,7 @@ var Eventing_1 = require("./Eventing");
 
 var Sync_1 = require("./Sync");
 
-var rootUrl = "https://localhost:3000/users";
+var rootUrl = "http://localhost:3000/users";
 
 var User =
 /** @class */
@@ -2093,6 +2097,16 @@ function () {
     });
   };
 
+  User.prototype.save = function () {
+    var _this = this;
+
+    this.sync.save(this.attributes.getAll()).then(function (response) {
+      _this.trigger('save');
+    }).catch(function () {
+      _this.trigger('error');
+    });
+  };
+
   return User;
 }();
 
@@ -2107,15 +2121,14 @@ Object.defineProperty(exports, "__esModule", {
 var User_1 = require("./models/User");
 
 var user = new User_1.User({
-  name: 'new record',
-  age: 40
+  id: 2,
+  name: 'newer name',
+  age: 10
 });
-user.events.on('change', function () {
-  console.log('new change');
+user.on('save', function () {
+  console.log(user);
 });
-user.set({
-  name: 'new Name'
-});
+user.save();
 },{"./models/User":"src/models/User.ts"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
