@@ -2042,10 +2042,10 @@ var rootUrl = "https://localhost:3000/users";
 var User =
 /** @class */
 function () {
-  function User(attr) {
+  function User(attrs) {
     this.events = new Eventing_1.Eventing();
     this.sync = new Sync_1.Sync(rootUrl);
-    this.attrs = new Attributes_1.Attributes();
+    this.attrs = new Attributes_1.Attributes(attrs);
   }
 
   return User;

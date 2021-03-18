@@ -15,10 +15,9 @@ export class User {
 
   public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl);
 
-  public attrs: Attributes<UserProps> = new Attributes<UserProps>;
+  public attrs: Attributes<UserProps>;
 
-  constructor(attr: new Attributes<UserProps>){
-    
+  constructor(attrs: UserProps) {
+    this.attrs = new Attributes<UserProps>(attrs);
   }
-
 }
