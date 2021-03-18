@@ -7,7 +7,7 @@ export class Attributes<T> {
     return this.data[key];
   };
 
-  set(update: T): void {
+  set = (update: T): void => {
     Object.assign(this.data, update);
   }
 }
