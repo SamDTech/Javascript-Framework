@@ -20,8 +20,8 @@ interface Events {
   trigger(eventName: string): void;
 }
 
-interface HasId{
-  id?: number
+interface HasId {
+  id?: number;
 }
 
 export class Model<T extends HasId> {
@@ -31,17 +31,11 @@ export class Model<T extends HasId> {
     private sync: Sync<T>
   ) {}
 
-  get on() {
-    return this.events.on;
-  }
+  on = this.events.on;
 
-  get trigger() {
-    return this.events.trigger;
-  }
+  trigger = this.events.trigger;
 
-  get get() {
-    return this.attributes.get;
-  }
+  get = this.attributes.get;
 
   set(update: T): void {
     this.attributes.set(update);
