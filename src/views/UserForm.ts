@@ -1,22 +1,22 @@
 export class UserForm {
- constructor(public parent: Element){}
+  constructor(public parent: Element) {}
 
   template(): string {
     return `<div>
-    <h1> User Form     </h1>
-      <Form>
-      <input />
-      </Form>
-
-    
-    </div>`;
+              <h1> User Form </h1>
+                <Form>
+                      <input />
+                </Form>
+            </div>`;
   }
 
   render(): void {
-    const parentElement = document.createElement('template');
+    const templateElement = document.createElement('template');
 
-    parentElement.innerHTML = this.template();
+    templateElement.innerHTML = this.template();
 
-    this.parent.append(parentElement.content);
+    console.log(this.parent);
+
+    this.parent?.append(templateElement.content);
   }
 }
