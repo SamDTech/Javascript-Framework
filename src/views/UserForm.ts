@@ -3,8 +3,13 @@ export class UserForm {
 
   eventsMap(): { [key: string]: () => void } {
     return {
-      'div:click': this.onButtonClick,
+      'click:button': this.onButtonClick,
+      'mouseenter:h1': this.onHeaderHover
     };
+  }
+
+  onHeaderHover(): void{
+    console.log('h1 is hover')
   }
 
   onButtonClick(): void {
@@ -13,11 +18,24 @@ export class UserForm {
 
   template(): string {
     return `<div>
-              <h1> User Form </h1>
-                <Form>
+              <h1> User Form </h1>              
                       <input />
-                </Form>
+               <button>Click Me</button>
             </div>`;
+  }
+
+  bindEvents(fragments: DocumentFragment): void {
+    const eventsMap = this.eventsMap();
+
+    for (const eventKey in eventsMap) {
+      const [eventName, selector] = eventKey.split(':');
+
+      fragments
+        .querySelectorAll(selector)
+        .forEach((element) =>
+          element.addEventListener(eventName, eventsMap[eventKey])
+        );
+    }
   }
 
   render(): void {
@@ -25,7 +43,7 @@ export class UserForm {
 
     templateElement.innerHTML = this.template();
 
-    console.log(this.parent);
+    this.bindEvents(templateElement.content);
 
     this.parent?.append(templateElement.content);
   }

@@ -134,8 +134,13 @@ function () {
 
   UserForm.prototype.eventsMap = function () {
     return {
-      'div:click': this.onButtonClick
+      'click:button': this.onButtonClick,
+      'mouseenter:h1': this.onHeaderHover
     };
+  };
+
+  UserForm.prototype.onHeaderHover = function () {
+    console.log('h1 is hover');
   };
 
   UserForm.prototype.onButtonClick = function () {
@@ -143,7 +148,25 @@ function () {
   };
 
   UserForm.prototype.template = function () {
-    return "<div>\n              <h1> User Form </h1>\n                <Form>\n                      <input />\n                </Form>\n            </div>";
+    return "<div>\n              <h1> User Form </h1>              \n                      <input />\n               <button>Click Me</button>\n            </div>";
+  };
+
+  UserForm.prototype.bindEvents = function (fragments) {
+    var eventsMap = this.eventsMap();
+
+    var _loop_1 = function _loop_1(eventKey) {
+      var _a = eventKey.split(':'),
+          eventName = _a[0],
+          selector = _a[1];
+
+      fragments.querySelectorAll(selector).forEach(function (element) {
+        return element.addEventListener(eventName, eventsMap[eventKey]);
+      });
+    };
+
+    for (var eventKey in eventsMap) {
+      _loop_1(eventKey);
+    }
   };
 
   UserForm.prototype.render = function () {
@@ -151,7 +174,7 @@ function () {
 
     var templateElement = document.createElement('template');
     templateElement.innerHTML = this.template();
-    console.log(this.parent);
+    this.bindEvents(templateElement.content);
     (_a = this.parent) === null || _a === void 0 ? void 0 : _a.append(templateElement.content);
   };
 
@@ -198,7 +221,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34033" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36903" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
