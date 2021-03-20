@@ -2354,6 +2354,10 @@ function (_View_1$View) {
 
     _this = _super.apply(this, arguments);
 
+    _this.onSaveClick = function () {
+      _this.model.save();
+    };
+
     _this.onSetNameClick = function () {
       var input = _this.parent.querySelector('input');
 
@@ -2378,13 +2382,14 @@ function (_View_1$View) {
     value: function eventsMap() {
       return {
         'click:.set-age': this.onSetAgeClick,
-        'click:.set-name': this.onSetNameClick
+        'click:.set-name': this.onSetNameClick,
+        'click:.save-model': this.onSaveClick
       };
     }
   }, {
     key: "template",
     value: function template() {
-      return "<div>\n              <h1> User Form </h1>      \n              <div>User name: ".concat(this.model.get('name'), "</div>\n               <div>User age: ").concat(this.model.get('age'), "</div>              \n                      <input />\n               <button class='set-name'>Change Name</button>\n               <button class='set-age'>Set Random Image</button>\n\n            </div>");
+      return "<div>\n                       \n                <input placeholder=".concat(this.model.get('name'), " />\n               <button class='set-name'>Change Name</button>\n               <button class='set-age'>Set Random Image</button>\n               <button class='save-model'>Save User</button>\n\n            </div>");
     }
   }]);
 
